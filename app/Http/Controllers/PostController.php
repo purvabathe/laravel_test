@@ -4,9 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostResource;
+
 
 class PostController extends Controller
 {
+    
+    public function index(Request $request)
+    {
+        // $posts = Post::all();
+        // return PostResource::collection($posts);
+        return Post::with('comments')->get();
+    }
+
     public function store(Request $request)
     {
         $post = Post::create($request->all());
@@ -23,7 +33,9 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->update($request->all());
-        return response()->json($post);
+
+        return new PostResource($post);
+        //return response()->json($post);
     }
 
     public function destroy($id)

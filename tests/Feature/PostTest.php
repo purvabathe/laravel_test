@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -30,7 +31,7 @@ class PostTest extends TestCase
     #[Test]
     public function it_reads_a_post()
     {
-        $post = Post::create([
+        $post = Post::factory()->create([
             'title' => 'My Post',
             'description' => 'Content of the post.',
         ]);
@@ -47,7 +48,7 @@ class PostTest extends TestCase
     #[Test]
     public function it_updates_a_post()
     {
-        $post = Post::create([
+        $post = Post::factory()->create([
             'title' => 'Old Title',
             'description' => 'Old Content',
         ]);
@@ -67,7 +68,7 @@ class PostTest extends TestCase
     /** #[Test] */
     public function it_deletes_a_post()
     {
-        $post = Post::create([
+        $post = Post::factory()->create([
             'title' => 'Post to delete',
             'description' => 'This post will be deleted.',
         ]);
